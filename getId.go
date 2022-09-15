@@ -9,7 +9,7 @@ import (
 
 // Get the id accroding to symbol.
 // Some tokens like usdc.e on avalanche cannot be found by coingecko list, need special process.
-func (g *Gecko) GetId(network string, symbol string) (string, error) {
+func (g *Gecko) GetId(symbol string, network string) (string, error) {
 	// avalanche bridge tokens have ".e" after the origin symbol
 	if network == chainId.AvalancheChainName {
 		symbol = strings.Split(symbol, ".")[0]
