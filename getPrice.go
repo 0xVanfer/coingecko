@@ -8,9 +8,9 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 )
 
-// Get price by coingecko id.
+// Return token price.
 // Currency can be "", "usd" will be used by default.
-func (g *Gecko) GetPrice(id string, currency string) (float64, error) {
+func (g *Gecko) GetPriceById(id string, currency string) (float64, error) {
 	if currency == "" {
 		currency = currencys.CurrencyUSDollar
 	}
@@ -26,17 +26,17 @@ func (g *Gecko) GetPrice(id string, currency string) (float64, error) {
 	return 0, nil
 }
 
-// Get token price by its symbol.
+// Return token price.
 // Some tokens like usdc.e on avalanche cannot be found by coingecko list, need special process.
 func (g *Gecko) GetPriceBySymbol(symbol string, network string, currency string) (float64, error) {
 	id, err := g.GetId(symbol, network)
 	if err != nil {
 		return 0, err
 	}
-	return g.GetPrice(id, currency)
+	return g.GetPriceById(id, currency)
 }
 
-// Get token price by its address.
+// Return token price.
 // Some tokens like usdc.e on avalanche cannot be found by coingecko list, need special process.
 func (g *Gecko) GetPriceByAddress(address string, network string, currency string, client bind.ContractBackend) (float64, error) {
 	token, err := erc20.NewErc20(common.HexToAddress(address), client)
@@ -51,5 +51,5 @@ func (g *Gecko) GetPriceByAddress(address string, network string, currency strin
 	if err != nil {
 		return 0, err
 	}
-	return g.GetPrice(id, currency)
+	return g.GetPriceById(id, currency)
 }
