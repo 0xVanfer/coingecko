@@ -1,6 +1,8 @@
 package coingecko
 
 import (
+	"errors"
+
 	"github.com/0xVanfer/abigen/erc20"
 	"github.com/0xVanfer/coingecko/currencys"
 	"github.com/0xVanfer/coingecko/geckoapis"
@@ -29,6 +31,9 @@ func (g *Gecko) GetPriceById(id string, currency string) (float64, error) {
 // Return token price.
 // Some tokens like usdc.e on avalanche cannot be found by coingecko list, need special process.
 func (g *Gecko) GetPriceBySymbol(symbol string, network string, currency string) (float64, error) {
+	if symbol == "" {
+		return 0, errors.New("symbol must not be empty")
+	}
 	id, err := g.GetId(symbol, network)
 	if err != nil {
 		return 0, err
@@ -39,6 +44,12 @@ func (g *Gecko) GetPriceBySymbol(symbol string, network string, currency string)
 // Return token price.
 // Some tokens like usdc.e on avalanche cannot be found by coingecko list, need special process.
 func (g *Gecko) GetPriceByAddress(address string, network string, currency string, client bind.ContractBackend) (float64, error) {
+	if address == "" {
+		return 0, errors.New("address must not be empty")
+	}
+	if address == "0x0000000000000000000000000000000000000000" {
+		return 0, errors.New("address must not be zero")
+	}
 	token, err := erc20.NewErc20(common.HexToAddress(address), client)
 	if err != nil {
 		return 0, err
