@@ -11,6 +11,7 @@ import (
 )
 
 // Return token price.
+//
 // Currency can be "", "usd" will be used by default.
 func (g *Gecko) GetPriceById(id string, currency string) (float64, error) {
 	if currency == "" {
@@ -29,6 +30,7 @@ func (g *Gecko) GetPriceById(id string, currency string) (float64, error) {
 }
 
 // Return token price.
+//
 // Some tokens like usdc.e on avalanche cannot be found by coingecko list, need special process.
 func (g *Gecko) GetPriceBySymbol(symbol string, network string, currency string) (float64, error) {
 	if symbol == "" {
@@ -42,6 +44,7 @@ func (g *Gecko) GetPriceBySymbol(symbol string, network string, currency string)
 }
 
 // Return token price.
+//
 // Some tokens like usdc.e on avalanche cannot be found by coingecko list, need special process.
 func (g *Gecko) GetPriceByAddress(address string, network string, currency string, client bind.ContractBackend) (float64, error) {
 	if address == "" {

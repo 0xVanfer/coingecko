@@ -8,6 +8,7 @@ import (
 )
 
 // Return the id accroding to symbol.
+//
 // Some tokens like usdc.e on avalanche cannot be found by coingecko list, need special process.
 func (g *Gecko) GetId(symbol string, network string) (string, error) {
 	// avalanche bridge tokens have ".e" after the origin symbol

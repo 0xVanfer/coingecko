@@ -12,7 +12,11 @@ type Gecko struct {
 	UpdatedAt time.Time
 }
 
-// Create a new gecko.
+// Create a new coingeco reader.
+//
+// "apiKey" is the key for pro users, to unlock the request limits.
+//
+// "" can be used as the key, and you will have a request limit of 10-50 times/min.
 func New(apiKey string) (*Gecko, error) {
 	list, err := geckoapis.GetGeckoTokenList(apiKey)
 	if err != nil {
