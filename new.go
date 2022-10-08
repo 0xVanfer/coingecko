@@ -31,15 +31,11 @@ func New(apiKey string) (*Gecko, error) {
 }
 
 // Update the token list in gecko.
-func (g *Gecko) Update() (*Gecko, error) {
+func (g *Gecko) Update() {
 	newList, err := geckoapis.GetGeckoTokenList(g.ApiKey)
 	if err != nil {
-		return g, err
+		return
 	}
-	var newGecko = Gecko{
-		ApiKey:    g.ApiKey,
-		TokenList: newList,
-		UpdatedAt: time.Now(),
-	}
-	return &newGecko, nil
+	g.TokenList = newList
+	g.UpdatedAt = time.Now()
 }
