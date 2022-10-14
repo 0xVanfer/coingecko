@@ -4,18 +4,20 @@ import (
 	"errors"
 
 	"github.com/0xVanfer/abigen/erc20"
-	"github.com/0xVanfer/coingecko/currencys"
+	"github.com/0xVanfer/chainId"
 	"github.com/0xVanfer/coingecko/geckoapis"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/common"
 )
+
+// todo: currency use golang.org currency
 
 // Return token price.
 //
 // Currency can be "", "usd" will be used by default.
 func (g *Gecko) GetPriceById(id string, currency string) (float64, error) {
 	if currency == "" {
-		currency = currencys.CurrencyUSDollar
+		currency = "usd"
 	}
 	mapp, err := geckoapis.GetGeckoPrice(id, currency, g.ApiKey)
 	if err != nil {
@@ -66,4 +68,9 @@ func (g *Gecko) GetPriceByAddress(address string, network string, currency strin
 		return 0, err
 	}
 	return g.GetPriceById(id, currency)
+}
+
+// Return chain token price.
+func (g *Gecko) GetChainTokenPrice(network string, currency string) (float64, error) {
+	return g.GetPriceBySymbol(chainId.ChainTokenSymbolList[network], network, currency)
 }
