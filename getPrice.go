@@ -5,7 +5,7 @@ import (
 
 	"github.com/0xVanfer/abigen/erc20"
 	"github.com/0xVanfer/chainId"
-	"github.com/0xVanfer/coingecko/geckoapis"
+	"github.com/0xVanfer/coingecko/internal/geckoapis"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/shopspring/decimal"

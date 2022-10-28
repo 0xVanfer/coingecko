@@ -3,7 +3,7 @@ package coingecko
 import (
 	"time"
 
-	"github.com/0xVanfer/coingecko/geckoapis"
+	"github.com/0xVanfer/coingecko/internal/geckoapis"
 )
 
 type Gecko struct {
